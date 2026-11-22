@@ -1,0 +1,324 @@
+# French translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-22 23:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+msgid "Action unavailable."
+msgstr "Action indisponible."
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid ""
+"After closing, contributors can claim tokens if the funding goal is met "
+"or request a refund if it falls short. Sepolia tokens carry no equity or "
+"dividend rights."
+msgstr ""
+"À la clôture, le contrat permet de récupérer les tokens si l’objectif est"
+" atteint, ou de demander le remboursement de la contribution sinon. Les "
+"tokens émis sur Sepolia ne donnent droit à aucune action ni à aucun "
+"dividende."
+
+msgid "All campaigns"
+msgstr "← Toutes les levées"
+
+msgid "Amount"
+msgstr "Montant"
+
+msgid "Apply"
+msgstr "Appliquer"
+
+msgid "Browse campaigns ↓"
+msgstr "Explorer les levées ↓"
+
+msgid "Campaign approved and awaiting deployment by the startup."
+msgstr "Campagne approuvée, en attente de déploiement par l’entreprise."
+
+msgid "Campaign contract ↗"
+msgstr "Contrat de campagne ↗"
+
+msgid "Campaign open"
+msgstr "Campagne ouverte"
+
+msgid "Campaigns in the catalog"
+msgstr "Levées dans le catalogue"
+
+msgid "Choose a quantity between 1 and the available supply."
+msgstr "Choisissez une quantité comprise entre 1 et le stock disponible."
+
+msgid "Claim my tokens"
+msgstr "Récupérer mes tokens"
+
+msgid "Closed · goal met"
+msgstr "Clôturée · objectif atteint"
+
+msgid "Closed · refunds available"
+msgstr "Clôturée · remboursement disponible"
+
+msgid "Closes"
+msgstr "Clôture"
+
+msgid "Confirm in MetaMask."
+msgstr "Confirmez dans MetaMask."
+
+msgid "Connect MetaMask"
+msgstr "Connecter MetaMask"
+
+msgid "Connect MetaMask to view campaign data on Sepolia."
+msgstr "Connectez MetaMask pour lire la campagne sur Sepolia."
+
+msgid "Connect the startup wallet."
+msgstr "Connectez le portefeuille de l’entreprise."
+
+msgid "Contribute on Sepolia"
+msgstr "Contribuer sur Sepolia"
+
+msgid "Dark"
+msgstr "Sombre"
+
+msgid "Deploy campaign"
+msgstr "Déployer la campagne"
+
+msgid "Deploy on Sepolia"
+msgstr "Déployer sur Sepolia"
+
+msgid "Deploy the campaign factory using your test wallet."
+msgstr "Déployez le contrat commun aux campagnes avec votre portefeuille de test."
+
+msgid "Deployment awaiting confirmation."
+msgstr "Déploiement en attente de confirmation."
+
+msgid "Deployment confirmed."
+msgstr "Déploiement confirmé."
+
+msgid "Duration (minutes)"
+msgstr "Durée (minutes)"
+
+msgid "Each campaign sets a funding goal, a token price, and a closing date."
+msgstr ""
+"Chaque campagne fixe son objectif, son prix par token et sa date de "
+"clôture."
+
+msgid "Explore startup campaigns."
+msgstr "Découvrez les levées de startups."
+
+msgid "Factory configured"
+msgstr "Factory configurée"
+
+msgid "Funding"
+msgstr "Financement"
+
+msgid "Funding goal (ETH)"
+msgstr "Objectif (ETH)"
+
+msgid "Fundraising campaigns"
+msgstr "Levées de fonds"
+
+msgid "GOAL"
+msgstr "OBJECTIF"
+
+msgid "Language"
+msgstr "Langue"
+
+msgid "Light"
+msgstr "Clair"
+
+msgid "Market / city"
+msgstr "Marché / ville"
+
+msgid "MetaMask connected on Sepolia."
+msgstr "MetaMask connecté sur Sepolia."
+
+msgid "MetaMask is required."
+msgstr "MetaMask est nécessaire."
+
+msgid "My campaigns"
+msgstr "Mes levées"
+
+msgid "Network"
+msgstr "Réseau"
+
+msgid "New funding campaign"
+msgstr "Nouvelle levée de fonds"
+
+msgid "No campaigns submitted."
+msgstr "Aucune campagne déposée."
+
+msgid "No published campaigns."
+msgstr "Aucune campagne publiée."
+
+msgid "Open campaign"
+msgstr "Ouvrir la campagne →"
+
+msgid "Open in MetaMask"
+msgstr "Ouvrir dans MetaMask"
+
+msgid "Open the campaign in MetaMask to view its Sepolia status."
+msgstr "Ouvrez la campagne dans MetaMask pour consulter son état sur Sepolia."
+
+msgid "Open this page in a browser with MetaMask."
+msgstr "Ouvrez cette page dans un navigateur équipé de MetaMask."
+
+msgid "PRICE PER TOKEN"
+msgstr "PRIX / TOKEN"
+
+msgid "Pending review"
+msgstr "En attente de validation"
+
+msgid "Price per token (ETH)"
+msgstr "Prix par token (ETH)"
+
+msgid "Public contract address"
+msgstr "Adresse publique du contrat"
+
+msgid "Quantity of"
+msgstr "Quantité de"
+
+msgid "Reconnect MetaMask"
+msgstr "Reconnecter MetaMask"
+
+msgid "Reconnect MetaMask on Sepolia."
+msgstr "Reconnectez MetaMask sur Sepolia."
+
+msgid "Recover remaining tokens"
+msgstr "Récupérer les tokens restants"
+
+msgid "Refresh"
+msgstr "Actualiser"
+
+msgid "Request a refund"
+msgstr "Demander le remboursement"
+
+msgid "Request canceled in MetaMask."
+msgstr "Demande annulée dans MetaMask."
+
+msgid ""
+"Review funding goals and how funds will be used. Contribute on Sepolia "
+"with MetaMask."
+msgstr ""
+"Consultez les objectifs de financement et l’utilisation prévue des fonds."
+" Contribuez aux campagnes sur Sepolia avec MetaMask."
+
+msgid "STARTUP FUNDING · ETHEREUM SEPOLIA"
+msgstr "FINANCEMENT DE STARTUPS · ETHEREUM SEPOLIA"
+
+msgid "Sector"
+msgstr "Secteur"
+
+msgid "Sepolia data has not loaded yet."
+msgstr "Données Sepolia non chargées."
+
+msgid "Sepolia deployment needs to be configured."
+msgstr "Déploiement Sepolia à configurer."
+
+msgid "Sepolia setup"
+msgstr "Installation Sepolia"
+
+msgid "Set FACTORY_ADDRESS to this value on the server, then restart Django."
+msgstr ""
+"Configurez cette valeur dans FACTORY_ADDRESS sur le serveur, puis "
+"redémarrez Django."
+
+msgid "Setup"
+msgstr "Installation"
+
+msgid "Sign in"
+msgstr "Se connecter"
+
+msgid "Sign out"
+msgstr "Déconnexion"
+
+msgid "Startup"
+msgstr "Startup"
+
+msgid "Startup dashboard"
+msgstr "Espace entreprise"
+
+msgid "Startup overview"
+msgstr "Présentation de la startup"
+
+msgid "Startup sign-in"
+msgstr "Connexion entreprise"
+
+msgid "Submit for review"
+msgstr "Soumettre à la validation"
+
+msgid "Symbol"
+msgstr "Symbole"
+
+msgid "TOKEN"
+msgstr "TOKEN"
+
+msgid "Test ETH"
+msgstr "ETH de test"
+
+msgid "Test network"
+msgstr "Réseau de test"
+
+msgid "The campaign is closed."
+msgstr "La campagne est fermée."
+
+msgid "The goal exceeds the maximum sale proceeds."
+msgstr "L’objectif dépasse le montant maximum de la vente."
+
+msgid "Theme"
+msgstr "Thème"
+
+msgid "Title"
+msgstr "Titre"
+
+msgid "Token name"
+msgstr "Nom du token"
+
+msgid "Token ↗"
+msgstr "Token ↗"
+
+msgid "Tokens for sale"
+msgstr "Tokens à vendre"
+
+msgid "Transaction awaiting confirmation."
+msgstr "Transaction en attente de confirmation."
+
+msgid "Transaction confirmed."
+msgstr "Transaction confirmée."
+
+msgid "Transaction confirmed. Refresh to view updated data."
+msgstr "Transaction confirmée. Actualisez la page pour voir les données."
+
+msgid "Use of funds"
+msgstr "Utilisation des fonds"
+
+msgid "View campaign"
+msgstr "Découvrir la levée →"
+
+msgid "View transaction ↗"
+msgstr "Voir la transaction ↗"
+
+msgid "Withdraw funds"
+msgstr "Retirer le financement"
+
+msgid "Your balance"
+msgstr "Votre solde"
+
+msgid "raised"
+msgstr "collectés"
+
+msgid "tokens available"
+msgstr "tokens disponibles"
+

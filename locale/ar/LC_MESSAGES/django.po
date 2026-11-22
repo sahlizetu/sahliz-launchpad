@@ -1,0 +1,320 @@
+# Arabic translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-22 23:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+msgid "Action unavailable."
+msgstr "الإجراء غير متاح."
+
+msgid "Administration"
+msgstr "الإدارة"
+
+msgid ""
+"After closing, contributors can claim tokens if the funding goal is met "
+"or request a refund if it falls short. Sepolia tokens carry no equity or "
+"dividend rights."
+msgstr ""
+"بعد الإغلاق، يمكن للمساهمين استلام الرموز إذا تحقق هدف التمويل، أو طلب "
+"استرداد المساهمة إن لم يتحقق. لا تمنح رموز سيبوليا حقاً في الأسهم أو "
+"الأرباح."
+
+msgid "All campaigns"
+msgstr "جميع الحملات"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Apply"
+msgstr "تطبيق"
+
+msgid "Browse campaigns ↓"
+msgstr "تصفح الحملات ↓"
+
+msgid "Campaign approved and awaiting deployment by the startup."
+msgstr "تمت الموافقة على الحملة وهي بانتظار النشر من الشركة."
+
+msgid "Campaign contract ↗"
+msgstr "عقد الحملة ↗"
+
+msgid "Campaign open"
+msgstr "الحملة مفتوحة"
+
+msgid "Campaigns in the catalog"
+msgstr "الحملات في القائمة"
+
+msgid "Choose a quantity between 1 and the available supply."
+msgstr "اختر كمية بين 1 والمخزون المتاح."
+
+msgid "Claim my tokens"
+msgstr "استلام رموزي"
+
+msgid "Closed · goal met"
+msgstr "مغلقة · تحقق الهدف"
+
+msgid "Closed · refunds available"
+msgstr "مغلقة · الاسترداد متاح"
+
+msgid "Closes"
+msgstr "الإغلاق"
+
+msgid "Confirm in MetaMask."
+msgstr "أكّد العملية في MetaMask."
+
+msgid "Connect MetaMask"
+msgstr "ربط MetaMask"
+
+msgid "Connect MetaMask to view campaign data on Sepolia."
+msgstr "اربط MetaMask لعرض بيانات الحملة على سيبوليا."
+
+msgid "Connect the startup wallet."
+msgstr "اربط محفظة الشركة."
+
+msgid "Contribute on Sepolia"
+msgstr "المساهمة على سيبوليا"
+
+msgid "Dark"
+msgstr "داكن"
+
+msgid "Deploy campaign"
+msgstr "نشر الحملة"
+
+msgid "Deploy on Sepolia"
+msgstr "النشر على سيبوليا"
+
+msgid "Deploy the campaign factory using your test wallet."
+msgstr "انشر عقد إنشاء الحملات باستخدام محفظة الاختبار."
+
+msgid "Deployment awaiting confirmation."
+msgstr "النشر بانتظار التأكيد."
+
+msgid "Deployment confirmed."
+msgstr "تم تأكيد النشر."
+
+msgid "Duration (minutes)"
+msgstr "المدة (بالدقائق)"
+
+msgid "Each campaign sets a funding goal, a token price, and a closing date."
+msgstr "تحدد كل حملة هدف التمويل وسعر الرمز وتاريخ الإغلاق."
+
+msgid "Explore startup campaigns."
+msgstr "اكتشف حملات تمويل الشركات الناشئة."
+
+msgid "Factory configured"
+msgstr "تم إعداد المصنع"
+
+msgid "Funding"
+msgstr "التمويل"
+
+msgid "Funding goal (ETH)"
+msgstr "هدف التمويل (ETH)"
+
+msgid "Fundraising campaigns"
+msgstr "حملات التمويل"
+
+msgid "GOAL"
+msgstr "الهدف"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Light"
+msgstr "فاتح"
+
+msgid "Market / city"
+msgstr "السوق / المدينة"
+
+msgid "MetaMask connected on Sepolia."
+msgstr "تم ربط MetaMask على سيبوليا."
+
+msgid "MetaMask is required."
+msgstr "يلزم استخدام MetaMask."
+
+msgid "My campaigns"
+msgstr "حملاتي"
+
+msgid "Network"
+msgstr "الشبكة"
+
+msgid "New funding campaign"
+msgstr "حملة تمويل جديدة"
+
+msgid "No campaigns submitted."
+msgstr "لا توجد حملات مقدمة."
+
+msgid "No published campaigns."
+msgstr "لا توجد حملات منشورة."
+
+msgid "Open campaign"
+msgstr "فتح الحملة"
+
+msgid "Open in MetaMask"
+msgstr "فتح في MetaMask"
+
+msgid "Open the campaign in MetaMask to view its Sepolia status."
+msgstr "افتح الحملة في MetaMask للاطلاع على حالتها على سيبوليا."
+
+msgid "Open this page in a browser with MetaMask."
+msgstr "افتح هذه الصفحة في متصفح يدعم MetaMask."
+
+msgid "PRICE PER TOKEN"
+msgstr "سعر الرمز"
+
+msgid "Pending review"
+msgstr "قيد المراجعة"
+
+msgid "Price per token (ETH)"
+msgstr "سعر الرمز (ETH)"
+
+msgid "Public contract address"
+msgstr "عنوان العقد العام"
+
+msgid "Quantity of"
+msgstr "كمية"
+
+msgid "Reconnect MetaMask"
+msgstr "إعادة ربط MetaMask"
+
+msgid "Reconnect MetaMask on Sepolia."
+msgstr "أعد ربط MetaMask على سيبوليا."
+
+msgid "Recover remaining tokens"
+msgstr "استرداد الرموز المتبقية"
+
+msgid "Refresh"
+msgstr "تحديث"
+
+msgid "Request a refund"
+msgstr "طلب الاسترداد"
+
+msgid "Request canceled in MetaMask."
+msgstr "أُلغي الطلب في MetaMask."
+
+msgid ""
+"Review funding goals and how funds will be used. Contribute on Sepolia "
+"with MetaMask."
+msgstr ""
+"اطّلع على أهداف التمويل وكيفية استخدام الأموال. ساهم عبر سيبوليا باستخدام"
+" MetaMask."
+
+msgid "STARTUP FUNDING · ETHEREUM SEPOLIA"
+msgstr "تمويل الشركات الناشئة · إيثريوم سيبوليا"
+
+msgid "Sector"
+msgstr "القطاع"
+
+msgid "Sepolia data has not loaded yet."
+msgstr "لم تُحمّل بيانات سيبوليا بعد."
+
+msgid "Sepolia deployment needs to be configured."
+msgstr "يجب إعداد النشر على سيبوليا."
+
+msgid "Sepolia setup"
+msgstr "إعداد سيبوليا"
+
+msgid "Set FACTORY_ADDRESS to this value on the server, then restart Django."
+msgstr "اضبط FACTORY_ADDRESS على هذه القيمة في الخادم، ثم أعد تشغيل Django."
+
+msgid "Setup"
+msgstr "الإعداد"
+
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
+msgid "Startup"
+msgstr "شركة ناشئة"
+
+msgid "Startup dashboard"
+msgstr "لوحة الشركة الناشئة"
+
+msgid "Startup overview"
+msgstr "نبذة عن الشركة الناشئة"
+
+msgid "Startup sign-in"
+msgstr "تسجيل دخول الشركة"
+
+msgid "Submit for review"
+msgstr "إرسال للمراجعة"
+
+msgid "Symbol"
+msgstr "الرمز المختصر"
+
+msgid "TOKEN"
+msgstr "الرمز"
+
+msgid "Test ETH"
+msgstr "عملة ETH تجريبية"
+
+msgid "Test network"
+msgstr "شبكة اختبار"
+
+msgid "The campaign is closed."
+msgstr "الحملة مغلقة."
+
+msgid "The goal exceeds the maximum sale proceeds."
+msgstr "يتجاوز الهدف الحد الأقصى لعائدات البيع."
+
+msgid "Theme"
+msgstr "المظهر"
+
+msgid "Title"
+msgstr "العنوان"
+
+msgid "Token name"
+msgstr "اسم الرمز"
+
+msgid "Token ↗"
+msgstr "الرمز ↗"
+
+msgid "Tokens for sale"
+msgstr "الرموز المعروضة للبيع"
+
+msgid "Transaction awaiting confirmation."
+msgstr "المعاملة بانتظار التأكيد."
+
+msgid "Transaction confirmed."
+msgstr "تم تأكيد المعاملة."
+
+msgid "Transaction confirmed. Refresh to view updated data."
+msgstr "تم تأكيد المعاملة. حدّث الصفحة لعرض البيانات."
+
+msgid "Use of funds"
+msgstr "استخدام الأموال"
+
+msgid "View campaign"
+msgstr "عرض الحملة"
+
+msgid "View transaction ↗"
+msgstr "عرض المعاملة ↗"
+
+msgid "Withdraw funds"
+msgstr "سحب التمويل"
+
+msgid "Your balance"
+msgstr "رصيدك"
+
+msgid "raised"
+msgstr "تم جمعها"
+
+msgid "tokens available"
+msgstr "رموز متاحة"
+

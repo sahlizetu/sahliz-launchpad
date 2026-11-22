@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% load i18n %}
+{% block body %}<h1>{{ company.name }}</h1><p class="wallet">{{ company.wallet }}</p>
+<div class="grid"><section class="card"><h2>{% translate "New funding campaign" %}</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button>{% translate "Submit for review" %}</button></form></section>
+<section class="card"><h2>{% translate "My campaigns" %}</h2>{% for campaign in campaigns %}
+<article class="studio-row"><strong>{{ campaign.title }}</strong>
+{% if campaign.approved %}<a href="{% url 'detail' campaign.reference %}">{% translate "Open campaign" %}</a>
+{% else %}<span>{% translate "Pending review" %}</span>{% endif %}</article>
+{% empty %}<p>{% translate "No campaigns submitted." %}</p>{% endfor %}</section></div>{% endblock %}

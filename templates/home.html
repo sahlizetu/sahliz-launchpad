@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% load i18n %}
+{% block body %}
+<section class="hero">
+<div class="hero-content"><p class="network">{% translate "STARTUP FUNDING · ETHEREUM SEPOLIA" %}</p>
+<h1>{% translate "Explore startup campaigns." %}</h1>
+<p>{% translate "Review funding goals and how funds will be used. Contribute on Sepolia with MetaMask." %}</p>
+<a class="button" href="#catalogue">{% translate "Browse campaigns ↓" %}</a></div>
+<aside class="hero-summary"><strong>{{ campaigns|length }}</strong><span>{% translate "Campaigns in the catalog" %}</span><hr><span>{% translate "Network" %}</span><b>Ethereum Sepolia</b></aside>
+</section>
+<section id="catalogue"><div class="section-title"><div><h2>{% translate "Fundraising campaigns" %}</h2><p>{% translate "Each campaign sets a funding goal, a token price, and a closing date." %}</p></div><span class="pill">{% translate "Test ETH" %}</span></div>
+<div class="grid">{% for campaign in campaigns %}
+<article class="card campaign-card"><div class="campaign-meta"><span class="pill">{{ campaign.sector|default:_("Startup") }}</span><span>{{ campaign.location }}</span></div>
+<p class="issuer">{{ campaign.company.name }}</p><h3>{{ campaign.title }}</h3>
+<p>{{ campaign.description|truncatechars:170 }}</p>
+<div class="figures"><div><small>{% translate "GOAL" %}</small><strong>{{ campaign.goal|floatformat:"-8u" }} ETH</strong></div><div><small>{% translate "TOKEN" %}</small><strong>{{ campaign.symbol }}</strong></div></div>
+<a href="{% url 'detail' campaign.reference %}">{% translate "View campaign" %}</a></article>
+{% empty %}<p>{% translate "No published campaigns." %}</p>{% endfor %}</div></section>
+{% endblock %}

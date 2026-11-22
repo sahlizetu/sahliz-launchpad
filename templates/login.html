@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% load i18n %}
+{% block body %}<section class="card narrow"><h1>{% translate "Startup sign-in" %}</h1><form method="post">{% csrf_token %}{{ form.as_p }}<button>{% translate "Sign in" %}</button></form></section>{% endblock %}

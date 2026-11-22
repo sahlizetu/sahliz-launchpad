@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% load i18n %}{% load static %}
+{% block body %}
+<section class="card narrow"><h1>{% translate "Sepolia setup" %}</h1>
+{% if factory %}<p>{% translate "Factory configured" %}</p><p class="wallet">{{ factory }}</p>{% else %}
+<p>{% translate "Deploy the campaign factory using your test wallet." %}</p>
+<button id="deploy-factory">{% translate "Deploy on Sepolia" %}</button>
+<p id="result" role="status"></p><label for="factory-address">{% translate "Public contract address" %}</label>
+<input id="factory-address" readonly>
+<p>{% translate "Set FACTORY_ADDRESS to this value on the server, then restart Django." %}</p>
+<script src="{% url 'javascript-catalog' %}"></script><script src="{% static 'ethers.umd.min.js' %}"></script><script src="{% static 'contracts.js' %}"></script>
+<script src="{% static 'setup.js' %}"></script>
+{% endif %}</section>
+{% endblock %}

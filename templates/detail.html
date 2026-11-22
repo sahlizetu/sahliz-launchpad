@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% load i18n %}{% load static %}
+{% block title %}{{ campaign.title }} · Sahliz Launchpad{% endblock %}
+{% block body %}<a href="{% url 'home' %}">{% translate "All campaigns" %}</a>
+<div class="section-title"><div><p class="issuer">{{ campaign.company.name }}</p><h1>{{ campaign.title }}</h1></div><button id="connect">{% translate "Connect MetaMask" %}</button><a id="mobile-wallet" class="button" hidden>{% translate "Open in MetaMask" %}</a></div>
+<div class="grid"><section class="card"><h2>{% translate "Startup overview" %}</h2>{% if campaign.sector %}<p><span class="pill">{{ campaign.sector }}</span> {{ campaign.location }}</p>{% endif %}<p>{{ campaign.description|linebreaksbr }}</p>
+{% if campaign.use_of_funds %}<h3>{% translate "Use of funds" %}</h3><p>{{ campaign.use_of_funds|linebreaksbr }}</p>{% endif %}<div class="figures"><div><small>{% translate "GOAL" %}</small><strong id="goal">{{ campaign.goal|floatformat:"-18u" }} ETH</strong></div><div><small>{% translate "PRICE PER TOKEN" %}</small><strong id="price">{{ campaign.price|floatformat:"-18u" }} ETH</strong></div></div>
+<p>{% translate "After closing, contributors can claim tokens if the funding goal is met or request a refund if it falls short. Sepolia tokens carry no equity or dividend rights." %}</p>
+<p id="links"></p></section>
+<section class="card"><h2>{% translate "Funding" %}</h2><button class="secondary" id="refresh" hidden>{% translate "Refresh" %}</button><p id="state">{% translate "Sepolia data has not loaded yet." %}</p>
+<p id="metrics" hidden><strong id="raised">0 ETH</strong> {% translate "raised" %} · <span id="remaining"></span> {% translate "tokens available" %}<br><span id="deadline"></span></p>
+{% if can_launch %}<button id="launch" data-action hidden>{% translate "Deploy campaign" %}</button>{% endif %}
+<form id="payment" hidden><label for="quantity">{% translate "Quantity of" %} <span id="token-symbol">{{ campaign.symbol }}</span></label><input id="quantity" type="number" inputmode="numeric" min="1" step="1" value="1" required>
+<p id="quote"></p><button type="submit" id="contribute">{% translate "Contribute on Sepolia" %}</button></form>
+<div class="actions">
+<button id="claim" data-action hidden>{% translate "Claim my tokens" %}</button><button id="refund" data-action hidden>{% translate "Request a refund" %}</button>
+<button id="withdraw" data-action hidden>{% translate "Withdraw funds" %}</button><button id="recover" data-action hidden>{% translate "Recover remaining tokens" %}</button>
+</div><p id="status" role="status"></p><p id="transaction"></p>
+</section></div>
+{{ chain_data|json_script:"campaign-config" }}
+<script src="{% url 'javascript-catalog' %}"></script><script src="{% static 'ethers.umd.min.js' %}"></script><script src="{% static 'contracts.js' %}"></script><script src="{% static 'campaign.js' %}"></script>
+{% endblock %}
