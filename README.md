@@ -9,10 +9,11 @@ or request a refund if the campaign falls short.
 Built with Django, Solidity, and ethers.js. The interface defaults to English
 and offers French, Arabic with right-to-left layout, and light and dark themes.
 
-## Démarrer en local (PowerShell)
+## Local setup
 
-Pré-requis de développement : Python 3.12 ou 3.13. Node.js est nécessaire
-pour recompiler ou tester les contrats.
+Use Python 3.12 or 3.13. Install Node.js to compile or test the smart contracts.
+
+In PowerShell:
 
 ```powershell
 py -m venv .venv
@@ -23,14 +24,15 @@ $env:DEBUG = "1"
 .\.venv\Scripts\python.exe manage.py runserver
 ```
 
-Ouvrir http://127.0.0.1:8000/. Sous Linux, utiliser `python3 -m venv .venv`,
-`.venv/bin/python` et `export DEBUG=1`.
+Open http://127.0.0.1:8000/. On Linux, use `python3 -m venv .venv`,
+`.venv/bin/python`, and `export DEBUG=1`.
 
-## Mise à jour du catalogue Startups
+## Update an existing installation
 
-Pour mettre à jour une installation existante, copier les fichiers du ZIP dans le dossier
-contenant `manage.py`. L'archive ne contient ni base SQLite ni environnement virtuel.
-Arrêter le serveur, puis exécuter dans PowerShell avec l'environnement activé :
+Stop the server and copy the release files into the directory containing
+`manage.py`. The release contains the source code. Keep your existing
+SQLite database and virtual environment. In PowerShell, with the virtual
+environment active, run:
 
 ```powershell
 $env:DEBUG = "1"
@@ -39,36 +41,41 @@ python manage.py seed_startups
 python manage.py runserver
 ```
 
-Lorsque les comptes du premier catalogue existent, la commande réutilise leurs deux
-adresses publiques pour les quatre startups et masque les deux anciennes campagnes.
-Sur une installation vierge, passer deux ou quatre adresses publiques distinctes dans
-l'ordre AtlasAI, GreenBox, AquaNorth, MedRoute. Avec deux adresses, AtlasAI et AquaNorth
-partagent la première, et GreenBox et MedRoute partagent la seconde. Réexécuter la commande
-conserve les campagnes et les portefeuilles déjà configurés.
+If the original catalog accounts exist, the seed command reuses their two
+public wallets for the four startups and hides the two original catalog
+campaigns. For a fresh installation, pass two or four distinct public wallet
+addresses to `seed_startups` in this order: AtlasAI, GreenBox, AquaNorth,
+MedRoute. With two addresses, AtlasAI and AquaNorth share the first, and
+GreenBox and MedRoute share the second. Rerunning the seed command preserves
+existing campaign records and configured wallets.
 
-## Parcours de contribution sur Sepolia
+## Contribution flow on Sepolia
 
-1. Alimenter les portefeuilles émetteurs utilisés et le portefeuille participant en ETH de test.
-2. Sur `/installation/`, se connecter en administrateur et déployer la factory si nécessaire.
-   Copier son adresse publique, définir `$env:FACTORY_ADDRESS = "0x..."` dans le
-   terminal et redémarrer Django. Une factory déjà déployée peut être réutilisée.
-3. Pour AtlasAI et GreenBox, activer les connexions avec `python manage.py changepassword atlas-ai`
-   et `python manage.py changepassword greenbox-ventures`. Chaque société se connecte et
-   déploie sa levée avec le portefeuille qui lui est associé. L’échéance est de quinze minutes.
-4. Avec un portefeuille participant, contribuer pour **100 ATLS** (0,001 ETH de test,
-   objectif atteint) et pour **10 GBX** (0,0001 ETH de test, objectif non atteint).
-5. Après les échéances, actualiser les pages pour récupérer 100 ATLS et demander le remboursement
-   GreenBox. L’émetteur d’AtlasAI peut retirer le financement. Les transactions sont vérifiables
-   sur Etherscan Sepolia.
+1. Fund the issuer and contributor wallets with test ETH.
+2. Sign in as an administrator and open `/installation/`. Deploy the campaign
+   factory if needed. Copy its public address, set
+   `$env:FACTORY_ADDRESS = "0x..."` in PowerShell, and restart Django.
+   You can reuse an existing Sepolia factory.
+3. Set passwords for the issuer accounts using
+   `python manage.py changepassword atlas-ai` and
+   `python manage.py changepassword greenbox-ventures`. Each startup signs
+   in and deploys its campaign with its assigned wallet. The seeded campaigns
+   run for 15 minutes from deployment.
+4. From a contributor wallet, reserve **100 ATLS** for **0.001 test ETH** to
+   meet AtlasAI's goal and **10 GBX** for **0.0001 test ETH** to leave
+   GreenBox below its goal.
+5. After both campaigns close, refresh their pages. The contributor can claim
+   the 100 ATLS and request a refund from GreenBox. The AtlasAI issuer can
+   withdraw the funds raised. The transaction links open Sepolia Etherscan.
 
-Les deux autres émetteurs utilisent les comptes Django `aquanorth` et `medroute`.
+The other issuer accounts are `aquanorth` and `medroute`.
 
-Pour une nouvelle campagne, le compte société la soumet depuis son espace
-et l'administrateur l'approuve dans `/admin/`. La société la déploie
-ensuite. Un contrat est lié à une référence de campagne et au portefeuille
-public attribué à la société.
+To launch a new campaign, submit it from the startup dashboard, approve it
+in `/admin/`, and deploy it from the campaign page using the startup wallet.
+The factory identifies the campaign by its UUID and the issuer's public
+wallet address.
 
-## Vérification
+## Tests
 
 ```text
 npm ci
@@ -77,47 +84,45 @@ npm test
 python manage.py test --settings=launchpad.test_settings
 ```
 
-Le test Ganache déploie les contrats de deux émetteurs, avance l'horloge
-et vérifie retrait, livraison ERC-20 et remboursement. Les tests Django
-vérifient catalogue, approbation et séparation entre les sociétés.
+The Ganache test deploys campaigns for two issuers, advances time, and checks
+withdrawals, ERC-20 token claims, and refunds. The Django tests cover the
+catalog, approval and deployment permissions, and language selection.
 
-## GitHub et publication
+## Deploy from GitHub to Render
 
-### GitHub et Render
+1. Extract the release ZIP and upload its contents to the repository root.
+2. In the Render dashboard, create a **Blueprint** linked to the repository.
+   The `render.yaml` file configures the Django web service. The build script
+   installs dependencies, collects static assets, and applies migrations.
+3. Set `DATABASE_URL` to a persistent PostgreSQL connection string and
+   `FACTORY_ADDRESS` to the public address of your Sepolia factory. Render
+   generates the Django secret key and the app accepts the Render hostname.
+4. Open the HTTPS URL shown by Render. Import your catalog before sharing
+   the link if the hosted database is new.
 
-1. Décompresser le ZIP et envoyer son contenu à la racine du dépôt GitHub.
-2. Dans Render, créer un **Blueprint** relié à ce dépôt. Le fichier `render.yaml`
-   configure le serveur Django, les migrations et les fichiers statiques.
-3. Renseigner `DATABASE_URL` avec la connexion PostgreSQL persistante et
-   `FACTORY_ADDRESS` avec l’adresse de la factory Sepolia existante.
-   La clé Django est générée par Render et le domaine Render est accepté automatiquement.
-4. Ouvrir l’URL HTTPS indiquée par Render et vérifier le catalogue. Sur une base
-   vide, importer les données voulues avant de partager le lien.
+To keep existing Sepolia campaigns, transfer their Django records and
+associated startup accounts. Preserve the campaign UUIDs and the public
+issuer addresses. Keep database exports and connection credentials outside
+GitHub. Compare a campaign contract address before and after importing to
+verify that both installations point to the same contract.
 
-Pour conserver les campagnes déjà déployées, transférer les enregistrements Django
-des entreprises et campagnes d’origine en conservant les UUID de campagne et les
-adresses des émetteurs. Importer les comptes associés de façon privée, avec un
-contenu limité aux comptes nécessaires. Garder les exports et la base hors de GitHub.
-Vérifier au moins une campagne existante en comparant l’adresse du contrat avant
-et après la migration. Pour une installation vierge, le paramètre facultatif
-`DEMO_WALLETS` permet de créer le catalogue initial avec deux ou quatre adresses
-publiques (AtlasAI, GreenBox, AquaNorth, MedRoute).
+For a new database, the optional `DEMO_WALLETS` environment variable accepts
+two or four space-separated public addresses to seed the catalog. Use the order
+AtlasAI, GreenBox, AquaNorth, MedRoute.
 
-### Lien depuis un autre site
+Run `python manage.py createsuperuser` once against the hosted database to set
+up administrator access. Use a Render shell if available, or a trusted local
+terminal configured with the database's external connection URL. Set passwords
+for startup accounts in Django admin or with `manage.py changepassword`.
 
-Pour un bouton sur le site existant, utiliser directement l’URL HTTPS affichée
-par Render. Pour rediriger une URL entière, configurer chez l’hébergeur du site
-source une redirection HTTP **302** vers cette URL. Une fois le lien vérifié,
-le statut **301** peut être utilisé pour une redirection permanente. Pour une
-campagne précise, utiliser son URL complète `/campagnes/<uuid>/`.
-Copier l’URL finale dans Safari ou Chrome pour ajouter l’icône à l’écran
-d’accueil. Pour contribuer, utiliser **Ouvrir dans MetaMask** sur la page de campagne.
+## Portfolio links and mobile access
 
-Pour accéder à l’administration et lancer de nouvelles campagnes, exécuter
-`python manage.py createsuperuser` une fois sur la base hébergée depuis un shell
-Render compatible ou un terminal de confiance configuré avec l’URL externe de
-la base. Définir ensuite les mots de passe des comptes des entreprises depuis
-l’administration Django ou `manage.py changepassword`.
+Use the Render HTTPS URL for a button on your portfolio. To redirect an existing
+URL, configure an HTTP **302** at the source host and switch to **301** if the
+redirect is permanent. To link to a single campaign, use its full
+`/campagnes/<uuid>/` URL.
 
-Le périmètre de cette version est le financement avec seuil, retrait ou
-remboursement, sur réseau de test. Les tokens ne donnent droit à aucune action ni à aucun dividende.
+On iPhone or Android, open the HTTPS URL and add Sahliz Launchpad to the home
+screen. To contribute, open a campaign and select **Open in MetaMask**.
+
+All contributions use test ETH. Sepolia tokens carry no equity or dividend rights.
