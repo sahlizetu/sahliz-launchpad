@@ -7,26 +7,54 @@
 <link rel="icon" href="{% static 'icon-192.png' %}">
 <link rel="apple-touch-icon" href="{% static 'icon-180.png' %}">
 <title>{% block title %}Sahliz Launchpad{% endblock %}</title><link rel="stylesheet" href="{% static 'site.css' %}"></head>
-<body><header><nav><a class="brand" href="{% url 'home' %}">Sahliz <span>Launchpad</span></a><div>
-{% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Administration" %}</a><a href="{% url 'setup' %}">{% translate "Setup" %}</a>{% endif %}
-{% if user.is_authenticated %}<a href="{% url 'studio' %}">{% translate "Startup dashboard" %}</a><form action="{% url 'logout' %}" method="post">{% csrf_token %}<button class="secondary">{% translate "Sign out" %}</button></form>
-{% else %}<a href="{% url 'login' %}">{% translate "Startup dashboard" %}</a>{% endif %}
-<form action="{% url 'set_language' %}" method="post" class="preferences">
-{% csrf_token %}<input name="next" type="hidden" value="{{ request.get_full_path }}">
-<label for="language-picker">{% translate "Language" %}</label>
-<select id="language-picker" name="language">
-<option value="en" lang="en"{% if language == "en" %} selected{% endif %}>English</option>
-<option value="fr" lang="fr"{% if language == "fr" %} selected{% endif %}>Français</option>
-<option value="ar" lang="ar"{% if language == "ar" %} selected{% endif %}>العربية</option>
-</select>
-<button class="secondary">{% translate "Apply" %}</button>
-</form>
-<div class="preferences">
-<label for="theme-picker">{% translate "Theme" %}</label>
-<select id="theme-picker">
-<option value="light">{% translate "Light" %}</option>
-<option value="dark">{% translate "Dark" %}</option>
-</select>
-</div>
-</div></nav></header><main>{% block body %}{% endblock %}</main>
+<body>
+<header class="site-header">
+  <nav aria-label="Sahliz Launchpad">
+    <a class="brand" href="{% url 'home' %}" dir="ltr">
+      <img src="{% static 'icon-192.png' %}" width="36" height="36" alt="">
+      <span>Sahliz Launchpad</span>
+    </a>
+    <div class="header-controls">
+      <details class="header-menu">
+        <summary class="header-control" aria-label="{% translate 'Language' %}">
+          {{ language|upper }} <span class="caret" aria-hidden="true"></span>
+        </summary>
+        <form method="post" action="{% url 'set_language' %}" class="header-panel">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          {% get_available_languages as languages %}
+          {% for code, name in languages %}
+            <button name="language" value="{{ code }}" lang="{{ code }}"{% if code == language %} aria-current="true"{% endif %}>{{ name }}</button>
+          {% endfor %}
+        </form>
+      </details>
+      <button class="header-control theme-toggle" id="theme-toggle" type="button"
+              aria-label="{% translate 'Dark' %}" title="{% translate 'Theme' %}" aria-pressed="false">
+        <span class="moon" aria-hidden="true">☾</span><span class="sun" aria-hidden="true">☼</span>
+      </button>
+      {% if user.is_authenticated %}
+        <details class="header-menu">
+          <summary class="header-control account-control" aria-label="{% translate 'Startup dashboard' %}">
+            <span class="account-icon" aria-hidden="true"></span><span class="account-label">{% translate "Startup dashboard" %}</span>
+          </summary>
+          <div class="header-panel">
+            <a href="{% url 'studio' %}">{% translate "Startup dashboard" %}</a>
+            {% if user.is_staff %}
+              <a href="{% url 'admin:index' %}">{% translate "Administration" %}</a>
+              <a href="{% url 'setup' %}">{% translate "Setup" %}</a>
+            {% endif %}
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}<button type="submit">{% translate "Sign out" %}</button>
+            </form>
+          </div>
+        </details>
+      {% else %}
+        <a class="header-control account-control" href="{% url 'login' %}" aria-label="{% translate 'Sign in' %}">
+          <span class="account-icon" aria-hidden="true"></span><span class="account-label">{% translate "Sign in" %}</span>
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+</header>
+<main>{% block body %}{% endblock %}</main>
 <footer>Sahliz Launchpad · Ethereum Sepolia · {% translate "Test network" %}</footer></body></html>
