@@ -44,6 +44,12 @@ msgstr "المبلغ"
 msgid "Apply"
 msgstr "تطبيق"
 
+msgid "Approve on Sepolia"
+msgstr "الموافقة على سيبوليا"
+
+msgid "Awaiting approval on Sepolia."
+msgstr "في انتظار الموافقة على سيبوليا."
+
 msgid "Browse campaigns ↓"
 msgstr "تصفح الحملات ↓"
 
@@ -74,6 +80,9 @@ msgstr "مغلقة · الاسترداد متاح"
 msgid "Closes"
 msgstr "الإغلاق"
 
+msgid "Commission on successful sales"
+msgstr "عمولة المبيعات عند تحقيق الهدف"
+
 msgid "Confirm in MetaMask."
 msgstr "أكّد العملية في MetaMask."
 
@@ -86,8 +95,17 @@ msgstr "اربط MetaMask لعرض بيانات الحملة على سيبولي
 msgid "Connect the startup wallet."
 msgstr "اربط محفظة الشركة."
 
+msgid "Contact email"
+msgstr "البريد الإلكتروني للتواصل"
+
 msgid "Contribute on Sepolia"
 msgstr "المساهمة على سيبوليا"
+
+msgid "Create a startup account"
+msgstr "إنشاء حساب شركة ناشئة"
+
+msgid "Create account"
+msgstr "إنشاء الحساب"
 
 msgid "Dark"
 msgstr "داكن"
@@ -101,11 +119,21 @@ msgstr "النشر على سيبوليا"
 msgid "Deploy the campaign factory using your test wallet."
 msgstr "انشر عقد إنشاء الحملات باستخدام محفظة الاختبار."
 
+msgid ""
+"Deploy with the administrator wallet that will approve campaigns on "
+"Sepolia."
+msgstr "انشر باستخدام محفظة المسؤول التي ستوافق على الحملات على سيبوليا."
+
 msgid "Deployment awaiting confirmation."
 msgstr "النشر بانتظار التأكيد."
 
 msgid "Deployment confirmed."
 msgstr "تم تأكيد النشر."
+
+msgid ""
+"Deployment could not be verified on Sepolia. Try publishing again once "
+"confirmed."
+msgstr "تعذّر التحقق من النشر على سيبوليا. أعد المحاولة بعد التأكيد."
 
 msgid "Duration (minutes)"
 msgstr "المدة (بالدقائق)"
@@ -118,6 +146,9 @@ msgstr "اكتشف حملات تمويل الشركات الناشئة."
 
 msgid "Factory configured"
 msgstr "تم إعداد المصنع"
+
+msgid "Factory for new campaigns"
+msgstr "عقد إنشاء الحملات الجديدة"
 
 msgid "Funding"
 msgstr "التمويل"
@@ -176,6 +207,9 @@ msgstr "افتح هذه الصفحة في متصفح يدعم MetaMask."
 msgid "PRICE PER TOKEN"
 msgstr "سعر الرمز"
 
+msgid "Pay fee and deploy"
+msgstr "دفع الرسوم والنشر على الشبكة"
+
 msgid "Pending review"
 msgstr "قيد المراجعة"
 
@@ -184,6 +218,9 @@ msgstr "سعر الرمز (ETH)"
 
 msgid "Public contract address"
 msgstr "عنوان العقد العام"
+
+msgid "Publish campaign"
+msgstr "نشر الحملة في القائمة"
 
 msgid "Quantity of"
 msgstr "كمية"
@@ -199,6 +236,9 @@ msgstr "استرداد الرموز المتبقية"
 
 msgid "Refresh"
 msgstr "تحديث"
+
+msgid "Registration fee"
+msgstr "رسوم تسجيل الحملة"
 
 msgid "Request a refund"
 msgstr "طلب الاسترداد"
@@ -231,8 +271,14 @@ msgstr "إعداد سيبوليا"
 msgid "Set FACTORY_ADDRESS to this value on the server, then restart Django."
 msgstr "اضبط FACTORY_ADDRESS على هذه القيمة في الخادم، ثم أعد تشغيل Django."
 
+msgid "Set a commission between 5% and 50% before approval."
+msgstr "حدد عمولة بين 5% و50% قبل الموافقة."
+
 msgid "Setup"
 msgstr "الإعداد"
+
+msgid "Sign a message with your startup wallet to verify your public address."
+msgstr "وقّع رسالة بمحفظة الشركة للتحقق من عنوانك العام."
 
 msgid "Sign in"
 msgstr "تسجيل الدخول"
@@ -245,6 +291,9 @@ msgstr "شركة ناشئة"
 
 msgid "Startup dashboard"
 msgstr "لوحة الشركة الناشئة"
+
+msgid "Startup name"
+msgstr "اسم الشركة الناشئة"
 
 msgid "Startup overview"
 msgstr "نبذة عن الشركة الناشئة"
@@ -305,6 +354,9 @@ msgstr "عرض الحملة"
 
 msgid "View transaction ↗"
 msgstr "عرض المعاملة ↗"
+
+msgid "Wallet signature could not be verified."
+msgstr "تعذّر التحقق من توقيع المحفظة."
 
 msgid "Withdraw funds"
 msgstr "سحب التمويل"

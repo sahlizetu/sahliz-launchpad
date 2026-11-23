@@ -79,7 +79,7 @@ contract Campaign is ReentrancyGuard {
         require(msg.sender == issuer, "Issuer only");
         require(block.timestamp >= deadline && raised >= goal && !paidOut, "Withdrawal unavailable");
         paidOut = true;
-        _pay(issuer, raised);
+        _distribute();
         emit Withdrawn(raised);
     }
 
@@ -91,7 +91,12 @@ contract Campaign is ReentrancyGuard {
         require(token.transfer(issuer, quantity * 1 ether), "Transfer failed");
     }
 
-    function _pay(address recipient, uint256 amount) private {
+    function _distribute() internal virtual {
+        _pay(issuer, raised);
+    }
+
+    function _pay(address recipient, uint256 amount) internal {
+        if (amount == 0) return;
         (bool success,) = payable(recipient).call{value: amount}("");
         require(success, "Payment failed");
     }
@@ -109,5 +114,70 @@ contract Launchpad {
         campaigns[referenceId][msg.sender] = address(campaign);
         emit CampaignCreated(referenceId, msg.sender, address(campaign));
         return address(campaign);
+    }
+}
+
+contract CommissionCampaign is Campaign {
+    address public immutable treasury;
+    uint16 public immutable commission;
+    event CommissionPaid(address indexed treasury, uint256 amount);
+
+    constructor(address issuer_, LaunchpadWithFees.Terms memory terms, address treasury_, uint16 commission_)
+        Campaign(issuer_, terms.name, terms.symbol, terms.price, terms.goal, terms.cap, block.timestamp + terms.duration)
+    {
+        treasury = treasury_;
+        commission = commission_;
+    }
+
+    function _distribute() internal override {
+        uint256 fee = (raised / 100) * commission + ((raised % 100) * commission) / 100;
+        _pay(treasury, fee);
+        _pay(issuer, raised - fee);
+        emit CommissionPaid(treasury, fee);
+    }
+}
+
+contract LaunchpadWithFees is ReentrancyGuard {
+    struct Terms {
+        string name;
+        string symbol;
+        uint256 price;
+        uint256 goal;
+        uint256 cap;
+        uint256 duration;
+    }
+
+    uint256 public constant registrationFee = 0.0001 ether;
+    address public immutable owner = msg.sender;
+    address public immutable treasury;
+    mapping(bytes32 => mapping(address => address)) public campaigns;
+    mapping(bytes32 => mapping(address => bytes32)) public approvals;
+    event CampaignCreated(bytes32 indexed referenceId, address indexed issuer, address campaign);
+
+    constructor(address treasury_) {
+        require(treasury_ != address(0), "Invalid treasury");
+        treasury = treasury_;
+    }
+
+    function approve(bytes32 referenceId, address issuer, Terms calldata terms, uint16 commission) external {
+        require(msg.sender == owner, "Owner only");
+        require(referenceId != bytes32(0) && issuer != address(0), "Invalid campaign");
+        require(campaigns[referenceId][issuer] == address(0), "Campaign already exists");
+        require(commission >= 5 && commission <= 50, "Invalid commission");
+        approvals[referenceId][issuer] = keccak256(abi.encode(terms, commission));
+    }
+
+    function createCampaign(bytes32 referenceId, Terms calldata terms, uint16 commission)
+        external payable nonReentrant returns (address)
+    {
+        require(msg.value == registrationFee, "Incorrect registration fee");
+        require(campaigns[referenceId][msg.sender] == address(0), "Campaign already exists");
+        require(approvals[referenceId][msg.sender] == keccak256(abi.encode(terms, commission)), "Approval required");
+        address campaign = address(new CommissionCampaign(msg.sender, terms, treasury, commission));
+        campaigns[referenceId][msg.sender] = campaign;
+        (bool sent,) = payable(treasury).call{value: msg.value}("");
+        require(sent, "Registration payment failed");
+        emit CampaignCreated(referenceId, msg.sender, campaign);
+        return campaign;
     }
 }

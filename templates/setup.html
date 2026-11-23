@@ -7,7 +7,19 @@
 <p id="result" role="status"></p><label for="factory-address">{% translate "Public contract address" %}</label>
 <input id="factory-address" readonly>
 <p>{% translate "Set FACTORY_ADDRESS to this value on the server, then restart Django." %}</p>
-<script src="{% url 'javascript-catalog' %}"></script><script src="{% static 'ethers.umd.min.js' %}"></script><script src="{% static 'contracts.js' %}"></script>
+{% endif %}{% if can_deploy_fee_factory %}
+<h2>{% translate "Factory for new campaigns" %}</h2>
+{% if fee_factory %}<p class="wallet">{{ fee_factory }}</p>{% else %}
+<p>{% translate "Deploy with the administrator wallet that will approve campaigns on Sepolia." %}</p>
+<button type="button" id="deploy-fee-factory" data-treasury="{{ treasury }}">{% translate "Deploy on Sepolia" %}</button>
+<p id="fee-result" role="status"></p>
+<label for="fee-factory-address">FEE_FACTORY_ADDRESS</label>
+<input id="fee-factory-address" readonly>
+{% endif %}
+{% endif %}
+</section>
+<script src="{% url 'javascript-catalog' %}"></script>
+<script src="{% static 'ethers.umd.min.js' %}"></script>
+<script src="{% static 'contracts.js' %}"></script>
 <script src="{% static 'setup.js' %}"></script>
-{% endif %}</section>
 {% endblock %}

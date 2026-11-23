@@ -126,3 +126,36 @@ On iPhone or Android, open the HTTPS URL and add Sahliz Launchpad to the home
 screen. To contribute, open a campaign and select **Open in MetaMask**.
 
 All contributions use test ETH. Sepolia tokens carry no equity or dividend rights.
+
+## Startup registration and campaign fees
+
+New startups can register from the sign-in page with a contact email, then sign
+a wallet verification message before submitting campaigns. Email confirmation
+is deferred. The signature verifies control of the wallet for the current
+session and does not broadcast a transaction.
+
+Configure the fee-enabled factory separately from the original factory:
+
+1. As a Django superuser, open the setup page and deploy the new factory on
+   Sepolia using the wallet that will authorize campaigns. Set the resulting
+   address in the server environment as `FEE_FACTORY_ADDRESS`.
+2. Set `SEPOLIA_RPC_URL` to an HTTPS Sepolia JSON-RPC endpoint reachable from
+   the server. Django uses it to verify deployment before public listing.
+3. On an existing installation, keep the SQLite database and the original
+   `FACTORY_ADDRESS`. Install the updated requirements, run
+   `python manage.py migrate` and `python manage.py collectstatic --noinput` with
+   the existing Django secret configured, then reload the web app.
+
+For each new campaign, set an integer commission between 5 and 50 in Django
+admin and approve the submission. Use the campaign link in admin and sign
+**Approve on Sepolia** with the factory administrator wallet. The startup can
+then use **Pay fee and deploy** from its own wallet. This single transaction
+creates the campaign and transfers 0.0001 test ETH to Sahliz Treasury. The
+startup then selects **Publish campaign**. Django lists the campaign after
+verifying the on-chain deployment and approved terms.
+
+When a successful campaign closes, the issuer's withdrawal splits sales
+proceeds between the issuer and Sahliz Treasury at the approved rate. If a
+campaign misses its goal, contributors can reclaim their full contributions.
+The registration fee is charged on deployment and is separate from refunds.
+Existing campaigns continue using the original factory.

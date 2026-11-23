@@ -1,6 +1,9 @@
 const config = JSON.parse(document.getElementById('campaign-config').textContent);
 const get = id => document.getElementById(id);
-const { Launchpad, Campaign, CampaignToken } = window.launchpadContracts;
+const { Launchpad, LaunchpadWithFees, Campaign, CampaignToken } = window.launchpadContracts;
+const factoryABI = config.requiresFee ? LaunchpadWithFees.abi : Launchpad.abi;
+const terms = () => [config.name, config.symbol, ethers.parseEther(config.price),
+    ethers.parseEther(config.goal), config.cap, config.duration * 60];
 const SEPOLIA = '0xaa36a7';
 const amount = value => ethers.formatEther(value) + ' ETH';
 let provider;
@@ -26,6 +29,7 @@ async function refresh() {
         element.hidden = true;
     }
     get('links').replaceChildren();
+    if (get('publish-campaign')) get('publish-campaign').hidden = true;
     if (!ethers.isAddress(config.factory)) {
         get('state').textContent = gettext("Sepolia deployment needs to be configured.");
         return;
@@ -38,14 +42,27 @@ async function refresh() {
         get('state').textContent = gettext("Reconnect MetaMask on Sepolia.");
         return;
     }
-    const factory = new ethers.Contract(config.factory, Launchpad.abi, provider);
+    const factory = new ethers.Contract(config.factory, factoryABI, provider);
     const address = await factory.campaigns(config.reference, config.issuer);
     const issuer = wallet.toLowerCase() === config.issuer.toLowerCase();
     if (address === ethers.ZeroAddress) {
         get('state').textContent = gettext("Campaign approved and awaiting deployment by the startup.");
-        if (get('launch')) get('launch').hidden = !issuer;
+        if (config.requiresFee) {
+            const approval = await factory.approvals(config.reference, config.issuer);
+            const expected = ethers.keccak256(ethers.AbiCoder.defaultAbiCoder().encode(
+                ['tuple(string,string,uint256,uint256,uint256,uint256)', 'uint16'],
+                [terms(), config.commission]
+            ));
+            const ready = approval === expected;
+            if (!ready) get('state').textContent = gettext("Awaiting approval on Sepolia.");
+            if (get('approve-on-chain')) {
+                get('approve-on-chain').hidden = ready || (await factory.owner()).toLowerCase() !== wallet.toLowerCase();
+            }
+            if (get('launch')) get('launch').hidden = !issuer || !ready;
+        } else if (get('launch')) get('launch').hidden = !issuer;
         return;
     }
+    if (get('publish-campaign')) get('publish-campaign').hidden = !issuer;
     const sale = new ethers.Contract(address, Campaign.abi, signer);
     const block = await provider.getBlock('latest');
     const calls = {blockTag: block.number};
@@ -144,9 +161,16 @@ get('connect').onclick = () => run(async () => {
     await refresh();
     get('status').textContent = gettext("MetaMask connected on Sepolia.");
 });
+if (get('approve-on-chain')) get('approve-on-chain').onclick = () => run(() => transact(() => {
+    const factory = new ethers.Contract(config.factory, factoryABI, signer);
+    return factory.approve(config.reference, config.issuer, terms(), config.commission);
+}));
 if (get('launch')) get('launch').onclick = () => run(() => transact(async () => {
     if (!wallet || get('launch').hidden) throw Error(gettext("Connect the startup wallet."));
-    const factory = new ethers.Contract(config.factory, Launchpad.abi, signer);
+    const factory = new ethers.Contract(config.factory, factoryABI, signer);
+    if (config.requiresFee) {
+        return factory.createCampaign(config.reference, terms(), config.commission, {value: await factory.registrationFee()});
+    }
     const block = await provider.getBlock('latest');
     return factory.createCampaign(config.reference, config.name, config.symbol, ethers.parseEther(config.price),
         ethers.parseEther(config.goal), config.cap, block.timestamp + config.duration * 60);

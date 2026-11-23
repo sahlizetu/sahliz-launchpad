@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% load i18n static %}
+{% block body %}
+<section class="card narrow">
+  <h1>{% translate "Connect the startup wallet." %}</h1>
+  <p>{% translate "Sign a message with your startup wallet to verify your public address." %}</p>
+  {% for message in messages %}<p role="status">{{ message }}</p>{% endfor %}
+  <form id="wallet-form" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="wallet">
+    <input type="hidden" name="signature">
+    <button type="button" id="verify-wallet">{% translate "Connect MetaMask" %}</button>
+  </form>
+  <a class="button" id="open-wallet-browser" hidden>{% translate "Open in MetaMask" %}</a>
+  <p id="wallet-status" role="status"></p>
+</section>
+{{ wallet_message|json_script:"wallet-message" }}
+<script src="{% url 'javascript-catalog' %}"></script>
+<script src="{% static 'ethers.umd.min.js' %}"></script>
+<script src="{% static 'wallet.js' %}"></script>
+{% endblock %}

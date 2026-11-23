@@ -57,3 +57,56 @@ test('two issuers, successful claim and payout, failed campaign refund', async (
         await rpc.disconnect();
     }
 });
+
+test('approved terms bind fee deployment and commission applies only to successful withdrawals', async () => {
+    const rpc = ganache.provider({logging: {quiet: true}});
+    try {
+        const provider = new ethers.BrowserProvider(rpc, undefined, {cacheTimeout: -1});
+        provider.pollingInterval = 25;
+        const [admin, issuer, buyer, treasury] = await Promise.all(
+            [0, 1, 2, 3].map(index => provider.getSigner(index))
+        );
+        const artifact = window.launchpadContracts.LaunchpadWithFees;
+        const factory = await new ethers.ContractFactory(artifact.abi, artifact.evm.bytecode.object, admin)
+            .deploy(treasury.address);
+        await factory.waitForDeployment();
+        const price = ethers.parseEther('0.00001');
+        const goal = price * 100n;
+        const fee = ethers.parseEther('0.0001');
+        const terms = ['Test Token', 'TEST', price, goal, 500, 120];
+        const successRef = ethers.id('success');
+        const failRef = ethers.id('failure');
+        const issuerFactory = factory.connect(issuer);
+        await assert.rejects(issuerFactory.createCampaign.staticCall(successRef, terms, 20, {value: fee}));
+        await assert.rejects(issuerFactory.approve.staticCall(successRef, issuer.address, terms, 20));
+        for (const rate of [4, 51]) {
+            await assert.rejects(factory.approve.staticCall(successRef, issuer.address, terms, rate));
+        }
+        const initial = await provider.getBalance(treasury.address);
+        for (const ref of [successRef, failRef]) {
+            await (await factory.approve(ref, issuer.address, terms, 20)).wait();
+            await assert.rejects(issuerFactory.createCampaign.staticCall(ref, terms, 21, {value: fee}));
+            await assert.rejects(issuerFactory.createCampaign.staticCall(ref, terms, 20, {value: 0}));
+            await (await issuerFactory.createCampaign(ref, terms, 20, {value: fee})).wait();
+        }
+        assert.equal(await provider.getBalance(treasury.address), initial + fee * 2n);
+        const campaign = async ref => new ethers.Contract(
+            await factory.campaigns(ref, issuer.address), Campaign.abi, buyer
+        );
+        const success = await campaign(successRef);
+        const failed = await campaign(failRef);
+        await (await success.contribute(100, {value: goal})).wait();
+        await (await failed.contribute(1, {value: price})).wait();
+        await rpc.request({method: 'evm_increaseTime', params: [121]});
+        await rpc.request({method: 'evm_mine', params: []});
+        await (await failed.refund()).wait();
+        assert.equal(await provider.getBalance(failed.target), 0n);
+        assert.equal(await provider.getBalance(treasury.address), initial + fee * 2n);
+        await (await success.connect(issuer).withdraw()).wait();
+        assert.equal(await provider.getBalance(treasury.address), initial + fee * 2n + goal / 5n);
+        assert.equal(await provider.getBalance(success.target), 0n);
+        await (await success.claim()).wait();
+    } finally {
+        await rpc.disconnect();
+    }
+});

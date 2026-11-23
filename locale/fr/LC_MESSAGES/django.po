@@ -44,6 +44,12 @@ msgstr "Montant"
 msgid "Apply"
 msgstr "Appliquer"
 
+msgid "Approve on Sepolia"
+msgstr "Valider sur Sepolia"
+
+msgid "Awaiting approval on Sepolia."
+msgstr "En attente de validation sur Sepolia."
+
 msgid "Browse campaigns ↓"
 msgstr "Explorer les levées ↓"
 
@@ -74,6 +80,9 @@ msgstr "Clôturée · remboursement disponible"
 msgid "Closes"
 msgstr "Clôture"
 
+msgid "Commission on successful sales"
+msgstr "Commission sur les ventes si l’objectif est atteint"
+
 msgid "Confirm in MetaMask."
 msgstr "Confirmez dans MetaMask."
 
@@ -86,8 +95,17 @@ msgstr "Connectez MetaMask pour lire la campagne sur Sepolia."
 msgid "Connect the startup wallet."
 msgstr "Connectez le portefeuille de l’entreprise."
 
+msgid "Contact email"
+msgstr "Adresse e-mail de contact"
+
 msgid "Contribute on Sepolia"
 msgstr "Contribuer sur Sepolia"
+
+msgid "Create a startup account"
+msgstr "Créer un compte startup"
+
+msgid "Create account"
+msgstr "Créer le compte"
 
 msgid "Dark"
 msgstr "Sombre"
@@ -101,11 +119,25 @@ msgstr "Déployer sur Sepolia"
 msgid "Deploy the campaign factory using your test wallet."
 msgstr "Déployez le contrat commun aux campagnes avec votre portefeuille de test."
 
+msgid ""
+"Deploy with the administrator wallet that will approve campaigns on "
+"Sepolia."
+msgstr ""
+"Déployez avec le portefeuille administrateur qui validera les campagnes "
+"sur Sepolia."
+
 msgid "Deployment awaiting confirmation."
 msgstr "Déploiement en attente de confirmation."
 
 msgid "Deployment confirmed."
 msgstr "Déploiement confirmé."
+
+msgid ""
+"Deployment could not be verified on Sepolia. Try publishing again once "
+"confirmed."
+msgstr ""
+"Impossible de vérifier le déploiement sur Sepolia. Réessayez après "
+"confirmation."
 
 msgid "Duration (minutes)"
 msgstr "Durée (minutes)"
@@ -120,6 +152,9 @@ msgstr "Découvrez les levées de startups."
 
 msgid "Factory configured"
 msgstr "Factory configurée"
+
+msgid "Factory for new campaigns"
+msgstr "Contrat de création des nouvelles campagnes"
 
 msgid "Funding"
 msgstr "Financement"
@@ -178,6 +213,9 @@ msgstr "Ouvrez cette page dans un navigateur équipé de MetaMask."
 msgid "PRICE PER TOKEN"
 msgstr "PRIX / TOKEN"
 
+msgid "Pay fee and deploy"
+msgstr "Payer les frais et déployer"
+
 msgid "Pending review"
 msgstr "En attente de validation"
 
@@ -186,6 +224,9 @@ msgstr "Prix par token (ETH)"
 
 msgid "Public contract address"
 msgstr "Adresse publique du contrat"
+
+msgid "Publish campaign"
+msgstr "Publier la campagne"
 
 msgid "Quantity of"
 msgstr "Quantité de"
@@ -201,6 +242,9 @@ msgstr "Récupérer les tokens restants"
 
 msgid "Refresh"
 msgstr "Actualiser"
+
+msgid "Registration fee"
+msgstr "Frais d’inscription de la campagne"
 
 msgid "Request a refund"
 msgstr "Demander le remboursement"
@@ -235,8 +279,16 @@ msgstr ""
 "Configurez cette valeur dans FACTORY_ADDRESS sur le serveur, puis "
 "redémarrez Django."
 
+msgid "Set a commission between 5% and 50% before approval."
+msgstr "Fixez une commission entre 5 % et 50 % avant validation."
+
 msgid "Setup"
 msgstr "Installation"
+
+msgid "Sign a message with your startup wallet to verify your public address."
+msgstr ""
+"Signez un message avec le portefeuille de la startup pour vérifier votre "
+"adresse publique."
 
 msgid "Sign in"
 msgstr "Se connecter"
@@ -249,6 +301,9 @@ msgstr "Startup"
 
 msgid "Startup dashboard"
 msgstr "Espace entreprise"
+
+msgid "Startup name"
+msgstr "Nom de la startup"
 
 msgid "Startup overview"
 msgstr "Présentation de la startup"
@@ -309,6 +364,9 @@ msgstr "Découvrir la levée →"
 
 msgid "View transaction ↗"
 msgstr "Voir la transaction ↗"
+
+msgid "Wallet signature could not be verified."
+msgstr "La signature du portefeuille n’a pas pu être vérifiée."
 
 msgid "Withdraw funds"
 msgstr "Retirer le financement"

@@ -6,9 +6,18 @@
 {% if campaign.use_of_funds %}<h3>{% translate "Use of funds" %}</h3><p>{{ campaign.use_of_funds|linebreaksbr }}</p>{% endif %}<div class="figures"><div><small>{% translate "GOAL" %}</small><strong id="goal">{{ campaign.goal|floatformat:"-18u" }} ETH</strong></div><div><small>{% translate "PRICE PER TOKEN" %}</small><strong id="price">{{ campaign.price|floatformat:"-18u" }} ETH</strong></div></div>
 <p>{% translate "After closing, contributors can claim tokens if the funding goal is met or request a refund if it falls short. Sepolia tokens carry no equity or dividend rights." %}</p>
 <p id="links"></p></section>
-<section class="card"><h2>{% translate "Funding" %}</h2><button class="secondary" id="refresh" hidden>{% translate "Refresh" %}</button><p id="state">{% translate "Sepolia data has not loaded yet." %}</p>
+<section class="card"><h2>{% translate "Funding" %}</h2><button class="secondary" id="refresh" hidden>{% translate "Refresh" %}</button>{% if campaign.requires_fee %}
+<p>{% translate "Registration fee" %} · 0.0001 ETH<br>{% translate "Commission on successful sales" %} · {{ campaign.commission }}%</p>
+{% for message in messages %}<p role="status">{{ message }}</p>{% endfor %}
+{% endif %}
+<p id="state">{% translate "Sepolia data has not loaded yet." %}</p>
 <p id="metrics" hidden><strong id="raised">0 ETH</strong> {% translate "raised" %} · <span id="remaining"></span> {% translate "tokens available" %}<br><span id="deadline"></span></p>
-{% if can_launch %}<button id="launch" data-action hidden>{% translate "Deploy campaign" %}</button>{% endif %}
+{% if can_approve %}<button id="approve-on-chain" data-action hidden>{% translate "Approve on Sepolia" %}</button>{% endif %}
+{% if can_launch and campaign.requires_fee and not campaign.published %}
+<form id="publish-campaign" method="post" action="{% url 'publish-campaign' campaign.reference %}" hidden>
+{% csrf_token %}<button type="submit">{% translate "Publish campaign" %}</button></form>
+{% endif %}
+{% if can_launch %}<button id="launch" data-action hidden>{% if campaign.requires_fee %}{% translate "Pay fee and deploy" %}{% else %}{% translate "Deploy campaign" %}{% endif %}</button>{% endif %}
 <form id="payment" hidden><label for="quantity">{% translate "Quantity of" %} <span id="token-symbol">{{ campaign.symbol }}</span></label><input id="quantity" type="number" inputmode="numeric" min="1" step="1" value="1" required>
 <p id="quote"></p><button type="submit" id="contribute">{% translate "Contribute on Sepolia" %}</button></form>
 <div class="actions">
